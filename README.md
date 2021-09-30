@@ -1,4 +1,5 @@
 # A supplement of Laravel macros and helpers
+[![Test Status](https://app.travis-ci.com/free3-5man/laravel-macros.svg?branch=master)](https://app.travis-ci.com/free3-5man/laravel-macros)
 
 This repository contains some useful collection macros and helper functions.
 
