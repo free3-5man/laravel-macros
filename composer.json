@@ -1,5 +1,5 @@
 {
-    "name": "freeman/laravel-macros",
+    "name": "free3_5man/laravel-macros",
     "description": "Extending Laravel Collection/Arr/Str/Builder/Carbon/CarbonPeriod with macros, some of Collection/Arr is inspired by prototyped.js, also with extra heper functions",
     "keywords": [
         "laravel-macros",

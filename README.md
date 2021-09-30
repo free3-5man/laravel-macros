@@ -7,7 +7,7 @@ This repository contains some useful collection macros and helper functions.
 You can pull in the package via composer:
 
 ``` bash
-composer require freeman/laravel-macros
+composer require free3_5man/laravel-macros
 ```
 
 The package will automatically register itself.
