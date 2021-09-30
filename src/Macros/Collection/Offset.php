@@ -15,7 +15,7 @@ class Offset
     {
         return function (int $offset) {
             /** @var \Illuminate\Support\Collection $this */
-            return $this->skip($offset);
+            return $this->slice($offset);
         };
     }
 }

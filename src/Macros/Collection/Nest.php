@@ -26,7 +26,9 @@ class Nest
             };
 
             /** @var \Illuminate\Support\Collection $this */
-            $roots = $this->whereNull($link)->values();
+            $roots = $this->filter(function($item) use($link) {
+                return !isset($item[$link]);
+            })->values();
             return $roots->map(function ($root) use ($recursiveMap) {
                 return $recursiveMap($root);
             });

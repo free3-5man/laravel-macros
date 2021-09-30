@@ -14,7 +14,7 @@ class Humanize
     public function __invoke()
     {
         return function (string $string) : string {
-            return Str::of($string)->trim()->kebab()->replaceMatches('/_+|-+/', ' ')->ucfirst();
+            return ucfirst(preg_replace('/_+|-+/', ' ', Str::kebab(trim($string))));
         };
     }
 }
