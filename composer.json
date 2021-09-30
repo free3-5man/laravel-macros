@@ -1,0 +1,65 @@
+{
+    "name": "freeman/laravel-macros",
+    "description": "Extending Laravel Collection/Arr/Str/Builder/Carbon/CarbonPeriod with macros, some of Collection/Arr is inspired by prototyped.js, also with extra heper functions",
+    "keywords": [
+        "laravel-macros",
+        "prototyped",
+        "collection-macros",
+        "eloquent-collection-macros",
+        "array-macros",
+        "string-macros",
+        "builder-macros",
+        "eloquent-builder-macros",
+        "carbon-macros",
+        "carbon-period-macros",
+        "helpers"
+    ],
+    "homepage": "https://github.com/free3_5man/laravel-macros",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Freeman",
+            "email": "free3_5man@163.com",
+            "homepage": "https://github.com/free3_5man",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.2.46"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.19",
+        "phpunit/phpunit": "^8.5"
+    },
+    "suggest": {},
+    "autoload": {
+        "psr-4": {
+            "Freeman\\LaravelMacros\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Freeman\\LaravelMacros\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Freeman\\LaravelMacros\\MacroServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
