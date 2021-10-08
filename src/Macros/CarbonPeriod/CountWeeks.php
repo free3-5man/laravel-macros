@@ -17,8 +17,6 @@ class CountWeeks
     {
         return function () : int {
             /** @var CarbonPeriod $this */
-            $this->start;
-
             $start = $this->getStartDate()->startOfDay();
             $end = $this->getEndDate()->startOfDay();
 
