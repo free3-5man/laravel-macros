@@ -4,7 +4,9 @@ namespace Freeman\LaravelMacros\Test;
 
 use Freeman\LaravelMacros\MacroServiceProvider;
 use Freeman\LaravelMacros\Test\Models\Article;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class BuilderTestCase extends Orchestra
@@ -18,13 +20,48 @@ abstract class BuilderTestCase extends Orchestra
 
         $this->resetDatabase();
 
-        // $this->loadLaravelMigrations(['--database' => 'sqlite']);
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        // $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->withFactories(__DIR__ . '/database/factories');
 
-        $this->artisan('migrate', ['--database' => 'sqlite']);
+        // $this->artisan('migrate', ['--database' => 'sqlite']);
+        $this->migrateTables();
 
         $this->seedDB();
+    }
+
+    private function migrateTables()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->string('name');
+            $table->date('birthday');
+            $table->integer('height');
+            $table->string('email')->nullable();
+            $table->string('gender');
+        });
+
+        Schema::create('articles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->string('title');
+            $table->text('content');
+            $table->integer('author_id');
+        });
+
+        Schema::create('films', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->string('name');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+        });
     }
 
     private function seedDB()
