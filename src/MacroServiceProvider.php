@@ -163,6 +163,7 @@ class MacroServiceProvider extends ServiceProvider
             'filter' => \Freeman\LaravelMacros\Macros\Builder\Filter::class,
             'filterRange' => \Freeman\LaravelMacros\Macros\Builder\FilterRange::class,
             'filterWhereNull' => \Freeman\LaravelMacros\Macros\Builder\FilterWhereNull::class,
+            'filterWhereLike' => \Freeman\LaravelMacros\Macros\Builder\FilterWhereLike::class,
             'overlaps' => \Freeman\LaravelMacros\Macros\Builder\Overlaps::class,
         ];
     }

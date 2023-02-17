@@ -35,9 +35,10 @@ class EnhancedPaginate
 
             // use tap to maitain the same format with $paginator
             // so don't return $paginator->map($callbackMap); here
-            return tap($paginator, function ($paginator) use ($callbackMap) {
+            return tap($paginator)->map($callbackMap);
+            /* return tap($paginator, function ($paginator) use ($callbackMap) {
                 $paginator->map($callbackMap);
-            });
+            }); */
         };
     }
 }
