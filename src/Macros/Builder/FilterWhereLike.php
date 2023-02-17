@@ -25,7 +25,7 @@ class FilterWhereLike
                     // use ?field=&... to represent whereNull(field)
                     /** @var Builder $this */
                     $this->when(array_key_exists($requestField, $data) && is_null($data[$requestField]), function ($query) use ($table, $tableField, $data, $requestField) {
-                        return $query->whereNull("{$table}.{$tableField}", 'ilike', $data[$requestField]);
+                        return $query->where("{$table}.{$tableField}", 'ilike', $data[$requestField]);
                     });
                 }
             }
