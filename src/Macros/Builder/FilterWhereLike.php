@@ -16,23 +16,24 @@ class FilterWhereLike
         return function (array $whereFields, ?array $data = null): Builder {
             $data = $data ?: request()->input();
 
-            foreach ($whereFields as $table => $fields) {
-                foreach (collect($fields)->groupBy(fn ($item) => $item, $preserveKeys = true) as $requestField => $assoc) {
-                    if (isset($data[$requestField])) {
-                        $clue = $data[$requestField];
-                        /** @var Builder $this */
-                        $this->where(function ($query) use ($assoc, $table, $clue) {
-                            foreach ($assoc as $tableField => $requestField) {
-                                $tableField = is_int($tableField) ? $requestField : $tableField;
-                                $query->orWhere("{$table}.{$tableField}", 'ilike', "%{$clue}%");
-                            }
-                        });
+            /** @var Builder $this */
+            return $this->where(function ($query) use ($whereFields, $data) {
+                // 多个 $table 之间是 or 的关系
+                foreach ($whereFields as $table => $fields) {
+                    foreach (collect($fields)->groupBy(fn ($item) => $item, $preserveKeys = true) as $requestField => $assoc) {
+                        if (isset($data[$requestField])) {
+                            $clue = $data[$requestField];
+                            /** @var Builder $this */
+                            $query->orWhere(function ($query) use ($assoc, $table, $clue) {
+                                foreach ($assoc as $tableField => $requestField) {
+                                    $tableField = is_int($tableField) ? $requestField : $tableField;
+                                    $query->orWhere("{$table}.{$tableField}", 'ilike', "%{$clue}%");
+                                }
+                            });
+                        }
                     }
                 }
-                return $this;
-            }
-
-            return $this;
+            });
         };
     }
 }
