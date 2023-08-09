@@ -23,8 +23,9 @@ class FilterWhereNull
                     $tableField = is_int($tableField) ? $requestField : $tableField;
 
                     // use ?field=&... to represent whereNull(field)
+                    $value = data_get($data, $requestField);
                     /** @var Builder $this */
-                    $this->when(array_key_exists($requestField, $data) && is_null($data[$requestField]), function ($query) use ($table, $tableField) {
+                    $this->when(array_key_exists($requestField, $data) && is_null($value), function ($query) use ($table, $tableField) {
                         return $query->whereNull("{$table}.{$tableField}");
                     });
                 }

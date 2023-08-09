@@ -24,12 +24,14 @@ class FilterRange
                     // zh-cn: 如果是整数，说明是自然的数组index，则表字段和请求字段同一
                     $tableField = is_int($tableField) ? $requestField : $tableField;
 
+                    $valueBegin = data_get($data, "{$requestField}{$surfixBegin}");
+                    $valueEnd = data_get($data, "{$requestField}{$surfixEnd}");
                     /** @var Builder $this */
                     // use isset but not empty in when, cause empty has problem with value 0(bool or int)
-                    $this->when(isset($data["{$requestField}{$surfixBegin}"]), function ($query) use ($where, $data, $tableField, $requestField, $table, $surfixBegin) {
-                        return $query->{$where}("{$table}.{$tableField}", '>=', $data["{$requestField}{$surfixBegin}"]);
-                    })->when(isset($data["{$requestField}{$surfixEnd}"]), function ($query) use ($where, $data, $tableField, $requestField, $table, $surfixEnd) {
-                        return $query->{$where}("{$table}.{$tableField}", '<=', $data["{$requestField}{$surfixEnd}"]);
+                    $this->when(isset($valueBegin), function ($query) use ($where, $tableField, $table, $valueBegin) {
+                        return $query->{$where}("{$table}.{$tableField}", '>=', $valueBegin);
+                    })->when(isset($valueEnd), function ($query) use ($where, $tableField, $table, $valueEnd) {
+                        return $query->{$where}("{$table}.{$tableField}", '<=', $valueEnd);
                     });
                 }
             }

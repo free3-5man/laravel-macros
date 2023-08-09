@@ -28,8 +28,8 @@ class FilterWhereLike
 
                 foreach ($whereFields as $table => $fields) {
                     foreach (collect($fields)->groupBy(fn ($item) => $item, $preserveKeys = true)->toArray() as $requestField => $assoc) {
-                        if (isset($data[$requestField])) {
-                            $clue = $data[$requestField];
+                        $clue = data_get($data, $requestField);
+                        if (isset($clue)) {
                             if ($tablesCount > 1)
                                 $query->orWhere(function ($query) use ($fnBuildOrQuery, $assoc, $table, $clue) {
                                     $fnBuildOrQuery($query, $assoc, $table, $clue);
